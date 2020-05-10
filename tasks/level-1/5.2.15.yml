@@ -1,0 +1,16 @@
+---
+
+# 5.2.15 - Ensure only approved MAC algorithms are used
+
+- name: 5.2.15 - Ensure only approved MAC algorithms are used
+  lineinfile:
+    regexp: "^KexAlgorithms\\s+"
+    line: "KexAlgorithms {{ cis_sshd_kexs }}"
+    dest: "/etc/ssh/sshd_config"
+  notify:
+    - Restart sshd
+  tags:
+    - level-1
+    - section-5
+    - "5.2.15"
+    - scored

@@ -1,0 +1,19 @@
+# Standards: 0.11
+---
+
+# 4.1.1.1 Ensure audit log storage size is configured (Not Scored)
+
+- name: 4.1.1.1 Ensure audit log storage size is configured
+  copy:
+    src: etc/audit/auditd.conf
+    dest: /etc/audit/auditd.conf
+
+- name: 4.1.1.1 Ensure audit log storage size is configured - log
+  lineinfile:
+    dest: "{{ cis_audit_auditd_filename }}"
+    line: "max_log_file = 500"
+  tags:
+    - "4.1.1.1"
+    - level-2
+    - section-4
+    - scored

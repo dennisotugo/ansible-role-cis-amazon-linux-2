@@ -1,0 +1,17 @@
+# Standards: 0.11
+---
+
+# 4.1.1.2 Ensure system is disabled when audit logs are full (Scored)
+
+- name: 4.1.1.2 Ensure system is disabled when audit logs are full
+  lineinfile:
+    dest: "{{ cis_audit_auditd_filename }}"
+    line: "{{ item }}"
+  with_items:
+    - 'space_left_action = SYSLOG'
+    - 'admin_space_left_action = halt'
+  tags:
+    - "4.1.1.2"
+    - level-2
+    - section-4
+    - scored

@@ -1,0 +1,50 @@
+# Standards: 0.11
+---
+
+# 5.2.2 - Ensure permissions on SSH private host key files are configured (Scored)
+
+- include: stat_sshd_config.yml
+  tags:
+    - level-1
+    - section-5
+    - "5.2.2"
+    - scored
+
+- name: 5.2.2 - Ensure permissions on ssh_host_rsa_key
+  file:
+    path: /etc/ssh/ssh_host_rsa_key
+    owner: root
+    group: ssh_keys
+    mode: 0640
+  when: sshd_config.stat.exists
+  tags:
+    - level-1
+    - section-5
+    - "5.2.3"
+    - scored
+
+- name: 5.2.2 - Ensure permissions on ssh_host_ecdsa_key
+  file:
+    path: /etc/ssh/ssh_host_ecdsa_key
+    owner: root
+    group: ssh_keys
+    mode: 0640
+  when: sshd_config.stat.exists
+  tags:
+    - level-1
+    - section-5
+    - "5.2.3"
+    - scored
+
+- name: 5.2.2 - Ensure permissions on ssh_host_ed25519_key
+  file:
+    path: /etc/ssh/ssh_host_ed25519_key
+    owner: root
+    group: ssh_keys
+    mode: 0640
+  when: sshd_config.stat.exists
+  tags:
+    - level-1
+    - section-5
+    - "5.2.3"
+    - scored

@@ -1,0 +1,9 @@
+# Standards: 0.11
+---
+
+# 1.6.2 Ensure SELinux is installed (Scored)
+
+- name: Install the SE Linux requirements - libselinux
+  yum:
+    name: libselinux
+    state: installed
