@@ -4,9 +4,10 @@
 # 5.4.4 Ensure default user umask is 027 or more restrictive
 
 - name: 5.4.4 - Ensure default user umask is 027 or more restrictive
-  lineinfile:
-    dest: "{{ item }}"
-    line: "{{ cis_umask_default }}"
+  replace:
+    path: "{{ item }}"
+    regexp: '(^\s+umask) (002|022)'
+    replace: '\1 {{ cis_umask_default }}'
   with_items: "{{ cis_umask_shell_files }}"
   tags:
     - level-1
