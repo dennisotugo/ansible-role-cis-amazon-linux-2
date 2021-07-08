@@ -4,18 +4,11 @@
 # 5.4.5 Ensure default user shell timeout is 900 seconds or less (Scored)
 
 - name: 5.4.5 Ensure default user shell timeout is 900 seconds or less (profile)
-  copy:
-    dest: "/etc/profile"
-    content: "TMOUT=600\n"
-  tags:
-    - level-2
-    - "5.4.5"
-    - scored
-
-- name: 5.4.5 Ensure default user shell timeout is 900 seconds or less (bash)
-  copy:
-    dest: "/etc/bashrc"
-    content: "TMOUT=600\n"
+  lineinfile:
+    path: "{{ item }}"
+    insertafter: "EOF"
+    line: "TMOUT=600\n"
+  with_items: "{{ cis_umask_shell_files }}"
   tags:
     - level-2
     - "5.4.5"
