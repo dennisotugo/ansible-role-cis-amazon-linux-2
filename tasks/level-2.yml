@@ -15,6 +15,8 @@
   when: "'1.6.1.6' not in cis_level_2_exclusions"
 - include: "level-2/1.6.2.yml"
   when: "'1.6.2' not in cis_level_2_exclusions"
+- include: "level-2/3.6.yml"
+  when: "'3.6' not in cis_level_2_exclusions"
 - include: "level-2/4.1.1.1.yml"
   when: "'4.1.1.1' not in cis_level_2_exclusions"
 - include: "level-2/4.1.1.2.yml"
