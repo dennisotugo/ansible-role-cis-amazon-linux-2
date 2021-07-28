@@ -14,8 +14,8 @@
 - name: 3.6 Disable IP v6
   replace:
       path: /etc/default/grub
-      regexp: '\"$'
-      replace: ' ipv6.disable=1\"'
+      regexp: 'audit=1\"$'
+      replace: 'audit=1 ipv6.disable=1\"'
   tags:
     - level-2
     - "3.6"
