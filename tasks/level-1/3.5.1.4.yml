@@ -48,7 +48,10 @@
 
 #Save iptables for next boot
 - name: 3.5.1.4 - save iptables for next boot
-  command: service iptables save
+  lineinfile:
+      path: /var/lib/cloud/scripts/per-once/00-firewall.sh
+      line: service iptables save
+      insertafter: EOF
   tags:
     - level-1
     - section-3
