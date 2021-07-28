@@ -12,10 +12,11 @@
     - not-scored
 
 - name: 3.6 Disable IP v6
-  replace:
+  lineinfile:
       path: /etc/default/grub
-      regexp: 'audit=1\"$'
-      replace: 'audit=1 ipv6.disable=1\"'
+      regexp: '(^GRUB_CMDLINE_LINUX_DEFAULT=\"[^\"]*)'
+      backrefs: yes
+      line: '\1 ipv6.disable=1"'
   tags:
     - level-2
     - "3.6"
