@@ -27,7 +27,7 @@
 #setup IPTABLES as a service
 - name: 3.5.1.4 - install IPTABLES Service
   yum: 
-        name=iptables-service
+        name: iptables-service
         state: latest
   tags:
     - level-1
