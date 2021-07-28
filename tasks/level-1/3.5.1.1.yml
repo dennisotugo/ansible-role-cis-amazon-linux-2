@@ -7,8 +7,7 @@
 - name: 3.5.1.1 - Ensure default deny firewall policy(DROP INPUT)
   copy:
       dest: /var/lib/cloud/scripts/per-once/00-firewall.sh
-      content:
-        iptables -F
+      src: {{ role_path }}/files/00-firewall.sh
   tags:
     - level-1
     - section-3
