@@ -1,17 +1,27 @@
 # Standards: 0.11
+
 ---
 
 # 3.5.1.1 Ensure default deny firewall policy
-
+# do this in a more cloudy way through cloud-init scripts
 - name: 3.5.1.1 - Ensure default deny firewall policy(DROP INPUT)
-  iptables:
-    chain: "{{item}}"
-    policy: DROP
-  become: yes
-  with_items:
-    - INPUT
-    - FORWARD
-    - OUTPUT
+  copy:
+      dest: /var/lib/cloud/scripts/per-once/00-firewall.sh
+      content:
+        '#!/bin/bash'
+        iptables -F
+  tags:
+    - level-1
+    - section-3
+    - "3.5.1.1"
+    - scored
+
+# make the file executable
+- name: 3.5.1.1 - Ensure default deny firewall policy(DROP INPUT)
+  file:
+      path: /var/lib/cloud/scripts/per-once/00-firewall.sh
+      mode: u=rwx,g=r,o=r
+      state: touch
   tags:
     - level-1
     - section-3

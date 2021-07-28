@@ -1,8 +1,8 @@
 # Standards: 0.11
+
 ---
 
 # 3.5.1.4 Ensure firewall rules exist for all open ports
-
 - name: 3.5.1.4 - Ensure firewall rules exist for all open ports
   debug:
     msg: "WARNING - We are already checking this as part of security groups."
@@ -11,18 +11,13 @@
     - section-3
     - "3.5.1.4"
     - not-scored
-    
 
+#do this using cloud-init scripts instead
 - name: 3.5.1.4 - Ensure firewall rules exist for accepting SSH connections
-  iptables:
-    chain: INPUT
-    protocol: tcp
-    destination_port: 22
-    ctstate: NEW
-    syn: match
-    jump: ACCEPT
-    comment: Accept new SSH connections.
-  become: yes
+  lineinfile:
+      path: /var/lib/cloud/scripts/per-once/00-firewall.sh
+      line: iptables -A INPUT -p tcp --dport 22 -j ACCEPT
+      insertafter: EOF
   tags:
     - level-1
     - section-3
