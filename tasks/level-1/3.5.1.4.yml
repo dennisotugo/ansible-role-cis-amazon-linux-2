@@ -23,3 +23,34 @@
     - section-3
     - "3.5.1.4"
     - not-scored
+
+#setup IPTABLES as a service
+- name: 3.5.1.4 - install IPTABLES Service
+  yum: 
+        name=iptables-service
+        state: latest
+  tags:
+    - level-1
+    - section-3
+    - "3.5.1.4"
+    - not-scored
+
+#Set iptables as enabled service
+- name: 3.5.1.4 - enable iptables service
+  systemd:
+        enabled: yes
+        name: iptables
+  tags:
+    - level-1
+    - section-3
+    - "3.5.1.4"
+    - not-scored
+
+#Save iptables for next boot
+- name: 3.5.1.4 - save iptables for next boot
+  command: service iptables save
+  tags:
+    - level-1
+    - section-3
+    - "3.5.1.4"
+    - not-scored
