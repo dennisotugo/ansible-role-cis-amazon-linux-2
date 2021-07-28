@@ -9,4 +9,22 @@
   tags:
     - level-2
     - "3.6"
-    - scored
+    - not-scored
+
+- name: 3.6 Disable IP v6
+  replace:
+      path: /etc/default/grub
+      regexp: '\"$'
+      replace: ' ipv6.disable=1\"'
+  tags:
+    - level-2
+    - "3.6"
+    - not-scored
+
+- name: 3.6 Disable IP v6
+  command: /sbin/grub2-mkconfig -o /boot/grub2/grub.cfg
+  tags:
+    - level-2
+    - "3.6"
+    - not-scored
+      
