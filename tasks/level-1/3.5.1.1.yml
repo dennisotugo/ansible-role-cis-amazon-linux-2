@@ -8,7 +8,6 @@
   copy:
       dest: /var/lib/cloud/scripts/per-once/00-firewall.sh
       content:
-        '#!/bin/bash'
         iptables -F
   tags:
     - level-1
