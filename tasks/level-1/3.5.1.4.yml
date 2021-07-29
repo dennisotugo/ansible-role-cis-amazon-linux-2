@@ -57,3 +57,29 @@
     - section-3
     - "3.5.1.4"
     - not-scored
+      
+#run the script to 
+- name: 3.5.1.4 - save iptables for next boot
+  lineinfile:
+      path: /var/lib/cloud/scripts/per-once/00-firewall.sh
+      line: service iptables save
+      insertafter: EOF
+  tags:
+    - level-1
+    - section-3
+    - "3.5.1.4"
+    - not-scored
+
+
+#per-once scripts are wonky and don't always work
+#so also write this out to /etc/sysconfig/iptables for next reload
+- name: 3.5.1.4 - save iptables for each boot
+  copy:
+      dest: /etc/sysconfig/iptables
+      src: "{{ role_path }}/files/etc_iptables"
+      mode: o=rw
+  tags:
+    - level-1
+    - section-3
+    - "3.5.1.4"
+    - not-scored

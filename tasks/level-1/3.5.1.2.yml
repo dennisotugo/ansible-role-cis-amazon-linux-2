@@ -4,18 +4,42 @@
 # 3.5.1.2 Ensure loopback traffic is configured
 # use cloud init way to do this
 - name: 3.5.1.2 - Ensure loopback traffic is configured(-i lo)
-  copy:
-      dest: /var/lib/cloud/scripts/per-once/00-firewall.sh
-      content:
-        iptables -A INPUT -i lo -j ACCEPT
-        iptables -A OUTPUT -o lo -j ACCEPT
-        iptables -A INPUT -s 127.0.0.0/8 -j DROP
+  lineinfile:
+      path: /var/lib/cloud/scripts/per-once/00-firewall.sh
+      line: iptables -A INPUT -i lo -j ACCEPT
+      insertafter: EOF
   tags:
     - level-1
     - section-3
     - "3.5.1.1"
     - scored
 
+# 3.5.1.2 Ensure loopback traffic is configured
+# use cloud init way to do this
+- name: 3.5.1.2 - Ensure loopback traffic is configured(-i lo)
+  lineinfile:
+      path: /var/lib/cloud/scripts/per-once/00-firewall.sh
+      line: iptables -A OUTPUT -o lo -j ACCEPT
+      insertafter: EOF
+  tags:
+    - level-1
+    - section-3
+    - "3.5.1.1"
+    - scored
+
+# 3.5.1.2 Ensure loopback traffic is configured
+# use cloud init way to do this
+- name: 3.5.1.2 - Ensure loopback traffic is configured(-i lo)
+  lineinfile:
+      path: /var/lib/cloud/scripts/per-once/00-firewall.sh
+      line: iptables -A INPUT -s 127.0.0.0/8 -j DROP
+      insertafter: EOF
+  tags:
+    - level-1
+    - section-3
+    - "3.5.1.1"
+    - scored
+      
 # make the file executable
 - name: 3.5.1.1 - Ensure default deny firewall policy(DROP INPUT)
   file:
@@ -27,3 +51,4 @@
     - section-3
     - "3.5.1.1"
     - scored
+
