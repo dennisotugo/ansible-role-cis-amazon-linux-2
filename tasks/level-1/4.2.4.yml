@@ -21,3 +21,14 @@
     - section-4
     - "4.2.4"
     - scored
+
+- name: 4.2.4 - Ensure permissions on all logfiles are configured
+  blockinfile: 
+      path: /etc/rsyslog.conf
+      marker: "$FileCreateMode 0640"
+      block: ""
+  tags:
+    - level-1
+    - section-4
+    - "4.2.4"
+    - scored
