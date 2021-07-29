@@ -10,3 +10,13 @@
     - section-4
     - "4.2.4"
     - scored
+
+- name: 4.2.4 - Ensure permissions on all logfiles are configured
+  lineinfile: 
+      line: $umask 000
+      insertbefore: BOF
+  tags:
+    - level-1
+    - section-4
+    - "4.2.4"
+    - scored
