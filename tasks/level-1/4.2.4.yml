@@ -13,6 +13,7 @@
 
 - name: 4.2.4 - Ensure permissions on all logfiles are configured
   lineinfile: 
+      path: /etc/rsyslog.conf
       line: $umask 000
       insertbefore: BOF
   tags:
