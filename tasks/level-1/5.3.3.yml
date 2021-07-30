@@ -57,11 +57,21 @@
     - "5.3.3"
     - scored
 
-- name: 5.3.3 - Ensure password reuse is limited (mv system-auth)
-  command: cd /etc/pam.d && mv system-auth system-auth-local && ln -s /etc/pam.d/system-auth-local system-auth && cp system-auth system-auth.bak
+- name: 5.3.3 - Ensure password reuse is limited (copy shell script into place)
+  copy:
+      dest: ~/
+      src: "{{ role_path }}/files/copy_system_auth.sh"
+      mode: o=rwx
   tags:
     - level-1
     - section-5
     - "5.3.3"
     - scored
 
+- name: 5.3.3.3 - Ensure password reuse is limited (execute shell script)
+  command: ~/copy_system_auth.sh
+  tags:
+    - level-1
+    - section-5
+    - "5.3.3"
+    - scored
