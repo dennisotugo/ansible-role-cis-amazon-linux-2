@@ -58,7 +58,7 @@
     - scored
 
 - name: 5.3.3 - Ensure password reuse is limited (mv system-auth)
-  command: mv /etc/pam.d/system-auth /etc/pam.d/system-auth-ansible && ln /etc/pam.d/system-auth-ansible /etc/pam.d/system-auth
+  command: mv /etc/pam.d/system-auth /etc/pam.d/system-auth-ansible && ln -s /etc/pam.d/system-auth-ansible /etc/pam.d/system-auth
   tags:
     - level-1
     - section-5
