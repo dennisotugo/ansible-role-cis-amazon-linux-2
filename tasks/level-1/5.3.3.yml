@@ -37,7 +37,7 @@
     - scored
 
 - name: 5.3.3 - Ensure password reuse is limited (mv password-auth)
-  command: mv /etc/pam.d/password-auth /etc/pam.d/password-auth-ansible
+  command: mv /etc/pam.d/password-auth /etc/pam.d/password-auth-local
   tags:
     - level-1
     - section-5
@@ -46,7 +46,7 @@
 
 - name: 5.3.3 - Ensure password reuse is limited (symlink password-auth)
   file:
-        src: /etc/pam.d/password-auth-ansible
+        src: /etc/pam.d/password-auth-local
         dest: /etc/pam.d/password-auth
         owner: root
         group: root
@@ -58,7 +58,7 @@
     - scored
 
 - name: 5.3.3 - Ensure password reuse is limited (mv system-auth)
-  command: cd /etc/pam.d && mv system-auth system-auth-ansible && ln -s /etc/pam.d/system-auth-ansible system-auth && cp system-auth system-auth.bak
+  command: cd /etc/pam.d && mv system-auth system-auth-local && ln -s /etc/pam.d/system-auth-local system-auth && cp system-auth system-auth.bak
   tags:
     - level-1
     - section-5
