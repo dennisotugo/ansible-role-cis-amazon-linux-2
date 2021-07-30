@@ -26,7 +26,7 @@
   blockinfile: 
       path: /etc/rsyslog.conf
       marker: "$FileCreateMode 0640"
-      block: ""
+      block: "$FileCreateMode 0600"
   tags:
     - level-1
     - section-4
