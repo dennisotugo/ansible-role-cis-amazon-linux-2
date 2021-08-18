@@ -3,10 +3,10 @@
 :INPUT DROP [0:0]
 :FORWARD DROP [0:0]
 :OUTPUT DROP [1:285]
--A INPUT -p tcp --dport 25 -m conntrack --ctstate NEW -j ACCEPT
--A INPUT -p tcp --dport 22 -m conntrack --ctstate NEW -j ACCEPT
--A INPUT -p udp --dport 68 -m conntrack --ctstate NEW -j ACCEPT
--A INPUT -p udp --dport 323 -m conntrack --ctstate NEW -j ACCEPT
+-A INPUT -p tcp --dport 25 -m state --state NEW -j ACCEPT
+-A INPUT -p tcp --dport 22 -m state --state NEW -j ACCEPT
+-A INPUT -p udp --dport 68 -m state --state NEW -j ACCEPT
+-A INPUT -p udp --dport 323 -m state --state NEW -j ACCEPT
 -A INPUT -i lo -j ACCEPT
 -A INPUT -s 127.0.0.0/8 -j DROP
 -A INPUT -p tcp -m state --state ESTABLISHED -j ACCEPT
