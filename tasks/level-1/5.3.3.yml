@@ -49,7 +49,7 @@
 
 - name: 5.3.3 - Ensure password reuse is limited (mv password-auth)
   command: mv /etc/pam.d/password-auth /etc/pam.d/password-auth-local
-  when: pwauthlink.stat.islnk is defined and pwauthlink.stat.islink
+  when: pwauthlink.stat.islnk is defined and pwauthlink.stat.islnk
   tags:
     - level-1
     - section-5
@@ -63,7 +63,7 @@
         owner: root
         group: root
         state: link
-  when: pwauthlink.stat.islnk is defined and pwauthlink.stat.islink
+  when: pwauthlink.stat.islnk is defined and pwauthlink.stat.islnk
   tags:
     - level-1
     - section-5
@@ -85,7 +85,7 @@
       dest: ~/
       src: "{{ role_path }}/files/copy_system_auth.sh"
       mode: o=rwx
-  when: sysauthlink.stat.islnk is defined and pwauthlink.stat.islink
+  when: sysauthlink.stat.islnk is defined and pwauthlink.stat.islnk
   tags:
     - level-1
     - section-5
@@ -94,7 +94,7 @@
 
 - name: 5.3.3.3 - Ensure password reuse is limited (execute shell script)
   command: ~/copy_system_auth.sh
-  when: sysauthlink.stat.islnk is defined and pwauthlink.stat.islink
+  when: sysauthlink.stat.islnk is defined and pwauthlink.stat.islnk
   tags:
     - level-1
     - section-5
