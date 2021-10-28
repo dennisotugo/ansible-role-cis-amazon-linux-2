@@ -14,4 +14,4 @@ RemainAfterExit=yes
 ExecStart=/usr/bin/chmod u=rw,g=r,o= /var/log/cloud-init.log /var/log/cloud-init-output.log
 
 [Install]
-WantedBy=multi-user.target:
+WantedBy=multi-user.target

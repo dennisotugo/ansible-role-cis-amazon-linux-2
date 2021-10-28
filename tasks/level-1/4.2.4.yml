@@ -36,8 +36,8 @@
 - name: 4.2.4 - Ensure permissions on all logfiles are configured (wtmp)
   lineinfile:
       path: /etc/tmpfiles.d/var.conf
-      regexp: ^.*wtmp 0660.*
-      line: f /var/log/wtmp 0644 root utmp -
+      regexp: ^.*wtmp 0640.*
+      line: f /var/log/wtmp 0640 root utmp -
   tags:
     - level-1
     - section-4
@@ -92,6 +92,17 @@
   copy:
       src: "{{ role_path }}/files/cloud-init-log-permissions.service"
       dest: /etc/systemd/system
+  tags:
+    - level-1
+    - section-4
+    - "4.2.4"
+    - scored
+
+- name: Enable service cloud-init-log-permissions.service and ensure it is not masked
+  systemd:
+      name: cloud-init-log-permissions
+      enabled: yes
+      masked: no
   tags:
     - level-1
     - section-4
