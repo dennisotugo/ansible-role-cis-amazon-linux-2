@@ -22,3 +22,26 @@
     - "4.2.4"
     - scored
 
+- name: 4.2.4 - Ensure permissions on all logfiles are configured
+  copy:
+      remote_src: yes
+      src: /usr/lib/tmpfiles.d/var.conf
+      dest: /etc/tmpfiles.d
+  tags:
+    - level-1
+    - section-4
+    - "4.2.4"
+    - scored
+
+- name: 4.2.4 - Ensure permissions on all logfiles are configured
+  lineinfile:
+      path: /etc/tmpfiles.d/var.conf
+      regexp: ^.*wtmp 0664.*
+      line: f /var/log/wtmp 0644 root utmp -
+  tags:
+    - level-1
+    - section-4
+    - "4.2.4"
+    - scored
+
+
