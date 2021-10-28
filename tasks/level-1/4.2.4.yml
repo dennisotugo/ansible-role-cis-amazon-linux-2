@@ -22,7 +22,7 @@
     - "4.2.4"
     - scored
 
-- name: 4.2.4 - Ensure permissions on all logfiles are configured
+- name: 4.2.4 - Ensure permissions on all logfiles are configured (wtmp)
   copy:
       remote_src: yes
       src: /usr/lib/tmpfiles.d/var.conf
@@ -33,10 +33,10 @@
     - "4.2.4"
     - scored
 
-- name: 4.2.4 - Ensure permissions on all logfiles are configured
+- name: 4.2.4 - Ensure permissions on all logfiles are configured (wtmp)
   lineinfile:
       path: /etc/tmpfiles.d/var.conf
-      regexp: ^.*wtmp 0664.*
+      regexp: ^.*wtmp 0660.*
       line: f /var/log/wtmp 0644 root utmp -
   tags:
     - level-1
@@ -44,4 +44,56 @@
     - "4.2.4"
     - scored
 
+- name: 4.2.4 - Ensure permissions on all logfiles are configured (dmesg)
+  copy:
+      remote_src: yes
+      src: /usr/lib/systemd/system/rhel-dmesg.service
+      dest: /etc/systemd/system
+  tags:
+    - level-1
+    - section-4
+    - "4.2.4"
+    - scored
 
+- name: 4.2.4 - Ensure permissions on all logfiles are configured (dmesg)
+  lineinfile:
+      path: /etc/systemd/service/rhel-dmesg.service
+      regexp: ^ExecStart.*
+      line: ExecStart=/etc/systemd/rhel-dmesg
+  tags:
+    - level-1
+    - section-4
+    - "4.2.4"
+    - scored
+
+- name: 4.2.4 - Ensure permissions on all logfiles are configured (dmesg)
+  copy:
+      remote_src: yes
+      src: /usr/lib/systemd/rhel-dmesg
+      dest: /etc/systemd
+  tags:
+    - level-1
+    - section-4
+    - "4.2.4"
+    - scored
+
+- name: 4.2.4 - Ensure permissions on all logfiles are configured (dmesg)
+  lineinfile:
+      path: /etc/systemd/rhel-dmesg
+      insertafter: ^#!/bin/bash
+      line: umask 0077  # added for hardening
+  tags:
+    - level-1
+    - section-4
+    - "4.2.4"
+    - scored
+
+- name: 4.2.4 - Ensure permissions on all logfiles are configured (cloud-init)
+  copy:
+      src: "{{ role_path }}/files/cloud-init-log-permissions.service"
+      dest: /etc/systemd/system
+  tags:
+    - level-1
+    - section-4
+    - "4.2.4"
+    - scored
