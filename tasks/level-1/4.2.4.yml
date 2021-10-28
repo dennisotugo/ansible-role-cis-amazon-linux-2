@@ -14,7 +14,7 @@
 - name: 4.2.4 - Ensure permissions on all logfiles are configured
   lineinfile: 
       path: /etc/rsyslog.conf
-      line: $umask 000
+      line: '$umask 000'
       insertbefore: BOF
   tags:
     - level-1
@@ -36,8 +36,8 @@
 - name: 4.2.4 - Ensure permissions on all logfiles are configured (wtmp)
   lineinfile:
       path: /etc/tmpfiles.d/var.conf
-      regexp: ^.*wtmp 0640.*
-      line: f /var/log/wtmp 0640 root utmp -
+      regexp: '^.*wtmp 0664.*'
+      line: 'f /var/log/wtmp 0640 root utmp -'
   tags:
     - level-1
     - section-4
