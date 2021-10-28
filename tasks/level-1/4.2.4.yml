@@ -57,7 +57,7 @@
 
 - name: 4.2.4 - Ensure permissions on all logfiles are configured (dmesg)
   lineinfile:
-      path: /etc/systemd/service/rhel-dmesg.service
+      path: /etc/systemd/system/rhel-dmesg.service
       regexp: ^ExecStart.*
       line: ExecStart=/etc/systemd/rhel-dmesg
   tags:
