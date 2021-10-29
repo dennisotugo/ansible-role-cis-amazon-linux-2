@@ -108,3 +108,36 @@
     - section-4
     - "4.2.4"
     - scored
+
+- name: 4.2.4 - Ensure permissions on all logfiles are configured (journal)
+  copy:
+      remote_src: yes
+      src: /usr/lib/tmpfiles.d/systemd.conf
+      dest: /etc/tmpfiles.d
+  tags:
+    - level-1
+    - section-4
+    - "4.2.4"
+    - scored
+
+- name: 4.2.4 - Ensure permissions on all logfiles are configured (journal)
+  lineinfile:
+      path: /etc/tmpfiles.d/systemd.conf
+      regexp: '^.*journal 2755.*'
+      line: 'z /var/log/journal 2740 root systemd-journal - -'
+  tags:
+    - level-1
+    - section-4
+    - "4.2.4"
+    - scored
+
+- name: 4.2.4 - Ensure permissions on all logfiles are configured (journal)
+  lineinfile:
+      path: /etc/tmpfiles.d/systemd.conf
+      regexp: '^.*journal/%m 2755.*'
+      line: 'z /var/log/journal/%m 2740 root systemd-journal - -'
+  tags:
+    - level-1
+    - section-4
+    - "4.2.4"
+    - scored
