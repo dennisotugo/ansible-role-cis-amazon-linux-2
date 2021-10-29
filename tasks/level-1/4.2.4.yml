@@ -77,6 +77,17 @@
     - "4.2.4"
     - scored
 
+- name: 4.2.4 - Ensure permissions on all logfiles are configured (amazon agents)
+  lineinfile:
+      path: /etc/systemd/system/amazon-cloudwatch-agent.service
+      insertafter: ^[Service]
+      line: Umask=0077
+  tags:
+    - level-1
+    - section-4
+    - "4.2.4"
+    - scored
+
 - name: 4.2.4 - Ensure permissions on all logfiles are configured (dmesg)
   lineinfile:
       path: /etc/systemd/rhel-dmesg
