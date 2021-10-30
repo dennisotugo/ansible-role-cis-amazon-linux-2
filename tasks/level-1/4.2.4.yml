@@ -173,3 +173,26 @@
     - section-4
     - "4.2.4"
     - scored
+
+
+- name: 4.2.4 - Ensure permissions on all logfiles are configured (chrony)
+  lineinfile:
+      path: /etc/tmpfiles.d/var.conf
+      insertafter: '^d /var/log.*'
+      line: 'd /var/chrony 0640 chrony chrony -'
+  tags:
+    - level-1
+    - section-4
+    - "4.2.4"
+    - scored
+
+- name: 4.2.4 - Ensure permissions on all logfiles are configured (sa)
+  lineinfile:
+      path: /etc/tmpfiles.d/var.conf
+      insertafter: '^d /var/log.*'
+      line: 'd /var/sa 0640 - - -'
+  tags:
+    - level-1
+    - section-4
+    - "4.2.4"
+    - scored
