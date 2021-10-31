@@ -196,3 +196,13 @@
     - section-4
     - "4.2.4"
     - scored
+
+- name: 4.2.4 - Ensure permissions on all logfiles are configured (amazon agents)
+  copy:
+      src: "{{ role_path }}/files/ssm.conf"
+      dest: /etc/tmpfiles.d/
+  tags:
+    - level-1
+    - section-4
+    - "4.2.4"
+    - scored
