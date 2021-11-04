@@ -55,10 +55,10 @@
     - "4.2.4"
     - scored
 
- - name: 4.2.4 - Ensure permissions on all logfiles are configured (dmesg)
-   stat:
-       path: /usr/lib/systemd/system/rhel-dmesg.service
-   register: dmesg
+- name: 4.2.4 - Ensure permissions on all logfiles are configured (dmesg)
+  stat:
+      path: /usr/lib/systemd/system/rhel-dmesg.service
+  register: dmesg
 
 
 - name: 4.2.4 - Ensure permissions on all logfiles are configured (dmesg)
