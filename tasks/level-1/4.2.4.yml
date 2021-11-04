@@ -55,11 +55,18 @@
     - "4.2.4"
     - scored
 
+ - name: 4.2.4 - Ensure permissions on all logfiles are configured (dmesg)
+   stat:
+       path: /usr/lib/systemd/system/rhel-dmesg.service
+   register: dmesg
+
+
 - name: 4.2.4 - Ensure permissions on all logfiles are configured (dmesg)
   copy:
       remote_src: yes
       src: /usr/lib/systemd/system/rhel-dmesg.service
       dest: /etc/systemd/system
+  when: dmesg exists
   tags:
     - level-1
     - section-4
@@ -71,6 +78,7 @@
       path: /etc/systemd/system/rhel-dmesg.service
       regexp: ^ExecStart.*
       line: ExecStart=/etc/systemd/rhel-dmesg
+  when: dmesg exists
   tags:
     - level-1
     - section-4
@@ -82,6 +90,7 @@
       remote_src: yes
       src: /usr/lib/systemd/rhel-dmesg
       dest: /etc/systemd
+  when: dmesg exists
   tags:
     - level-1
     - section-4
@@ -114,6 +123,7 @@
       path: /etc/systemd/rhel-dmesg
       insertafter: ^#!/bin/bash
       line: umask 0077  # added for hardening
+  when: dmesg exists
   tags:
     - level-1
     - section-4
