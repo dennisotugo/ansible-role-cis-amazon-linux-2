@@ -66,7 +66,7 @@
       remote_src: yes
       src: /usr/lib/systemd/system/rhel-dmesg.service
       dest: /etc/systemd/system
-  when: dmesg exists
+  when: dmesg.stat.exists
   tags:
     - level-1
     - section-4
@@ -78,7 +78,7 @@
       path: /etc/systemd/system/rhel-dmesg.service
       regexp: ^ExecStart.*
       line: ExecStart=/etc/systemd/rhel-dmesg
-  when: dmesg exists
+  when: dmesg.stat.exists
   tags:
     - level-1
     - section-4
@@ -90,7 +90,7 @@
       remote_src: yes
       src: /usr/lib/systemd/rhel-dmesg
       dest: /etc/systemd
-  when: dmesg exists
+  when: dmesg.stat.exists
   tags:
     - level-1
     - section-4
@@ -123,7 +123,7 @@
       path: /etc/systemd/rhel-dmesg
       insertafter: ^#!/bin/bash
       line: umask 0077  # added for hardening
-  when: dmesg exists
+  when: dmesg.stat.exists
   tags:
     - level-1
     - section-4
