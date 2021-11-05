@@ -98,10 +98,16 @@
     - scored
 
 - name: 4.2.4 - Ensure permissions on all logfiles are configured (amazon agents)
+  stat:
+      path: /usr/lib/systemd/system/amazon-cloudwatch-agent.service
+  register: cloudwatch
+  
+- name: 4.2.4 - Ensure permissions on all logfiles are configured (amazon agents)
   lineinfile:
       path: /etc/systemd/system/amazon-cloudwatch-agent.service
       insertafter: ^[Service]
       line: Umask=0077
+  when: cloudwatch.stat.exists
   tags:
     - level-1
     - section-4
