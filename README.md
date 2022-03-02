@@ -106,6 +106,12 @@ A more advanced example, which includes modifications to the default values used
   roles:
     - ansible-role-cis-amazon-linux-2.cis-amazon-linux
 
+  environment:
+      http_proxy:  http://yourproxy.yourorg.com:8080
+      https_proxy: http://yourproxy.yourorg.com:8080
+#if you have VPC endpoints defined, add them on the noproxy line below to use them
+#don't forget to noproxy the metadata service if you define proxies at 169.254.169.254
+      no_proxy:    169.254.169.254
 ```
 
 Note that the use of ```become: yes``` is required as 99% of tasks require privileged access to execute.

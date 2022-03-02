@@ -9,8 +9,10 @@
     control: sufficient
     module_path: pam_unix.so
     new_control: sufficient
+    new_module_path: pam_unix.so
+    new_type: password
     module_arguments: 'remember=5'
-    state: updated
+    state: args_present
   tags:
     - level-1
     - section-5
@@ -24,8 +26,75 @@
     control: sufficient
     module_path: pam_unix.so
     new_control: sufficient
+    new_module_path: pam_unix.so
+    new_type: password
     module_arguments: 'remember=5'
-    state: updated
+    state: args_present
+  tags:
+    - level-1
+    - section-5
+    - "5.3.3"
+    - scored
+
+- name: 5.3.3 - Test for symbolic link
+  stat:
+    path: /etc/pam.d/password-auth
+  register: pwauthlink
+  tags:
+    - level-1
+    - section-5
+    - "5.3.3"
+    - scored
+
+
+- name: 5.3.3 - Ensure password reuse is limited (mv password-auth)
+  command: mv /etc/pam.d/password-auth /etc/pam.d/password-auth-local
+  when: pwauthlink.stat.islnk is defined and pwauthlink.stat.islnk == False
+  tags:
+    - level-1
+    - section-5
+    - "5.3.3"
+    - scored
+
+- name: 5.3.3 - Ensure password reuse is limited (symlink password-auth)
+  file:
+        src: /etc/pam.d/password-auth-local
+        dest: /etc/pam.d/password-auth
+        owner: root
+        group: root
+        state: link
+  when: pwauthlink.stat.islnk is defined and pwauthlink.stat.islnk == False
+  tags:
+    - level-1
+    - section-5
+    - "5.3.3"
+    - scored
+
+- name: 5.3.3 - Test for symbolic link
+  stat:
+    path: /etc/pam.d/system-auth
+  register: sysauthlink
+  tags:
+    - level-1
+    - section-5
+    - "5.3.3"
+    - scored
+
+- name: 5.3.3 - Ensure password reuse is limited (copy shell script into place)
+  copy:
+      dest: ~/
+      src: "{{ role_path }}/files/copy_system_auth.sh"
+      mode: o=rwx
+  when: sysauthlink.stat.islnk is defined and pwauthlink.stat.islnk == False
+  tags:
+    - level-1
+    - section-5
+    - "5.3.3"
+    - scored
+
+- name: 5.3.3.3 - Ensure password reuse is limited (execute shell script)
+  command: ~/copy_system_auth.sh
+  when: sysauthlink.stat.islnk is defined and pwauthlink.stat.islnk == False
   tags:
     - level-1
     - section-5

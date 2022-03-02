@@ -72,4 +72,4 @@ for fields in mtab_entries:
 
     mounts.append(mount_info)
 
-print json.dumps(mounts)
+print (json.dumps(mounts))

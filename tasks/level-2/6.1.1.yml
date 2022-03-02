@@ -3,6 +3,85 @@
 
 # 6.1.1 Audit system file permissions
 
+# 6.1.1 fails due to some missing files on AWS Linux 2, just create them
+
+- name: 6.1.1 - create /etc/cron.deny
+  file: 
+      path: /etc/cron.deny
+      state: touch
+      mode: o=r
+  tags:
+    - level-2
+    - section-6
+    - "6.1.1"
+    - scored
+
+- name: 6.1.1 - create /var/run/amazon/amazon-cloudwatch-agent
+  file: 
+      path: /var/run/amazon/amazon-cloudwatch-agent
+      state: touch
+      mode: o=r
+  tags:
+    - level-2
+    - section-6
+    - "6.1.1"
+    - scored
+
+- name: 6.1.1 - create /var/run/amazon/cwagent-otel-collector
+  file: 
+      path: /var/run/amazon/cwagent-otel-collector
+      state: touch
+      mode: o=r
+  tags:
+    - level-2
+    - section-6
+    - "6.1.1"
+    - scored
+
+- name: 6.1.1 - create /etc/update-motd.d/30-banner
+  file: 
+      path: /etc/update-motd.d/30-banner
+      state: touch
+      mode: o=r
+  tags:
+    - level-2
+    - section-6
+    - "6.1.1"
+    - scored
+
+- name: 6.1.1 - create /etc/update-motd.d/70-available-updates
+  file: 
+      path: /etc/update-motd.d/70-available-updates
+      state: touch
+      mode: o=r
+  tags:
+    - level-2
+    - section-6
+    - "6.1.1"
+    - scored
+
+- name: 6.1.1 - create /etc/update-motd.d/50-amazon-linux-extras-news
+  file: 
+      path: /etc/update-motd.d/50-amazon-linux-extras-news
+      state: touch
+      mode: o=r
+  tags:
+    - level-2
+    - section-6
+    - "6.1.1"
+    - scored
+
+- name: 6.1.1 - create /etc/at.deny
+  file: 
+      path: /etc/at.deny
+      state: touch
+      mode: o=r
+  tags:
+    - level-2
+    - section-6
+    - "6.1.1"
+    - scored
+
 - name: 6.1.1 - Audit system file permissions
   command: rpm -Va --nomtime --nosize --nomd5 --nolinkto
   register: audit_6_1_1

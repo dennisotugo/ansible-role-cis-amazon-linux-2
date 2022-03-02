@@ -1,0 +1,31 @@
+---
+
+- name: 3.6 Disable IP v6
+  copy:
+      dest: "/etc/sysctl.d/98-disable_ipv6.conf"
+      content: 
+        net.ipv6.conf.all.disable_ipv6 = 1
+        net.ipv6.conf.default.disable_ipv6 = 1
+  tags:
+    - level-2
+    - "3.6"
+    - not-scored
+
+- name: 3.6 Disable IP v6
+  lineinfile:
+      path: /etc/default/grub
+      regexp: '(^GRUB_CMDLINE_LINUX_DEFAULT=\"[^\"]*)'
+      backrefs: yes
+      line: '\1 ipv6.disable=1"'
+  tags:
+    - level-2
+    - "3.6"
+    - not-scored
+
+- name: 3.6 Disable IP v6
+  command: /sbin/grub2-mkconfig -o /boot/grub2/grub.cfg
+  tags:
+    - level-2
+    - "3.6"
+    - not-scored
+      
